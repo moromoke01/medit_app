@@ -3,7 +3,7 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import Cookies from "js-cookie";
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = "https://healthconsultbackend.onrender.com/api";
 
 // Helper function to decode and store user data
 const decodeAndStoreUser = (token) => {
@@ -13,7 +13,6 @@ const decodeAndStoreUser = (token) => {
   return user;
 };
 
-
 // Login
 export const loginUser = createAsyncThunk(
   "auth/login",
@@ -22,36 +21,38 @@ export const loginUser = createAsyncThunk(
       const response = await axios.post(`${API_URL}/login`, credentials);
       const token = response.data.token;
       const user = jwtDecode(token);
-      
+
       // Debug logs
       console.log("Decoded JWT user:", user);
-      
+
       // Check for all possible ID fields (userId, userid, _id)
       if (!user?.userId && !user?.userid && !user?._id) {
         throw new Error("Token missing user identifier");
       }
 
-      // Normalize the user ID field
+      // Build normalized user object using backend response
       const normalizedUser = {
         ...user,
-        _id: user.userId || user.userid || user._id  // Standardize to _id
+        _id: user.userId || user.userid || user._id,
+        name: response.data.name || `${response.data.fname || ""} ${response.data.lname || ""}`.trim(),
+        email: response.data.email,
+        role: response.data.role,
       };
 
       Cookies.set("token", token, { expires: 7, path: "/" });
       Cookies.set("user", JSON.stringify(normalizedUser), { expires: 7, path: "/" });
-      
+
       return { user: normalizedUser, token };
     } catch (error) {
       console.error("Login error:", error);
       return thunkAPI.rejectWithValue(
-        error.response?.data?.message || 
-        error.message || 
+        error.response?.data?.message ||
+        error.message ||
         "Login failed"
       );
     }
   }
 );
-
 
 // Signup Doctor
 export const registerDoctor = createAsyncThunk(
@@ -113,11 +114,7 @@ export const verifyOTP = createAsyncThunk(
   async (otpData, thunkAPI) => {
     try {
       const response = await axios.post(`${API_URL}/verifyOTP`, otpData);
-      return response.data; 
-      // console.log("Backend Response:", response.data);
-      // const token = response.data.token;
-      // const user = decodeAndStoreUser(token); // Decode and store user
-      // return { user, token };
+      return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error.response?.data || "OTP verification failed"
@@ -158,7 +155,14 @@ const authSlice = createSlice({
       })
       .addCase(registerDoctor.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload.user;
+        const payload = action.payload;
+        state.user = {
+          ...payload,
+          name: payload.name || `${payload.fname || ""} ${payload.lname || ""}`.trim(),
+          _id: payload._id || payload.userId || payload.userid,
+          email: payload.email,
+          role: payload.role,
+        };
       })
       .addCase(registerDoctor.rejected, (state, action) => {
         state.isLoading = false;
@@ -171,7 +175,14 @@ const authSlice = createSlice({
       })
       .addCase(registerPatient.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload.user;
+        const payload = action.payload;
+        state.user = {
+          ...payload,
+          name: payload.name || `${payload.fname || ""} ${payload.lname || ""}`.trim(),
+          _id: payload._id || payload.userId || payload.userid,
+          email: payload.email,
+          role: payload.role,
+        };
       })
       .addCase(registerPatient.rejected, (state, action) => {
         state.isLoading = false;
@@ -198,8 +209,15 @@ const authSlice = createSlice({
       })
       .addCase(verifyOTP.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload.user;
-        state.token = action.payload.token;
+        const payload = action.payload;
+        state.user = {
+          ...payload,
+          name: payload.name || `${payload.fname || ""} ${payload.lname || ""}`.trim(),
+          _id: payload._id || payload.userId || payload.userid,
+          email: payload.email,
+          role: payload.role,
+        };
+        state.token = payload.token;
       })
       .addCase(verifyOTP.rejected, (state, action) => {
         state.isLoading = false;

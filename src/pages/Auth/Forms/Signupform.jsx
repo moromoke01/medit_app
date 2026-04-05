@@ -127,7 +127,7 @@ const Signupform = () => {
             value={formData.fname}
             onChange={handleChange}
             placeholder="First Name"
-            className="p-2 mb-4 border border-gray-300 rounded w-full"
+            className="p-2 mb-4 border border-gray-200 rounded w-full"
           />
           <input
             type="text"
@@ -135,7 +135,7 @@ const Signupform = () => {
             value={formData.lname}
             onChange={handleChange}
             placeholder="Last Name"
-            className="p-2 mb-4 border border-gray-300 rounded w-full"
+            className="p-2 mb-4 border border-gray-200 rounded w-full"
           />
           <input
             type="email"
@@ -143,7 +143,7 @@ const Signupform = () => {
             value={formData.email}
             onChange={handleChange}
             placeholder="Email"
-            className="p-2 mb-4 border border-gray-300 rounded w-full"
+            className="p-2 mb-4 border border-gray-200 rounded w-full"
           />
           <input
             type="password"
@@ -151,7 +151,7 @@ const Signupform = () => {
             value={formData.password}
             onChange={handleChange}
             placeholder="Password"
-            className="p-2 mb-4 border border-gray-300 rounded w-full"
+            className="p-2 mb-4 border border-gray-200 rounded w-full"
           />
           <input
             type="text"
@@ -159,13 +159,13 @@ const Signupform = () => {
             value={formData.contact}
             onChange={handleChange}
             placeholder="Contact"
-            className="p-2 mb-4 border border-gray-300 rounded w-full"
+            className="p-2 mb-4 border border-gray-200 rounded w-full"
           />
           <select
             name="role"
             value={formData.role}
             onChange={handleChange}
-            className="p-2 mb-4 border border-gray-300 rounded w-full"
+            className="p-2 mb-4 border border-gray-200 rounded w-full"
           >
             <option value="patient">Patient</option>
             <option value="doctor">Doctor</option>

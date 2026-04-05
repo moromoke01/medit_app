@@ -4,53 +4,83 @@ import call from '../../../assets/Home/telephone.png';
 import video from '../../../assets/Home/video-icon.png';
 
 const ConsultProcess = () => {
+  const consultationMethods = [
+    {
+      icon: chat,
+      title: 'Chat Consultation',
+      description: 'Perfect for non-urgent concerns and detailed discussions.',
+      steps: [
+        'Describe your health concerns in detail',
+        'Choose from specialized doctors',
+        'Make secure payment',
+        'Start chatting immediately'
+      ]
+    },
+    {
+      icon: call,
+      title: 'Phone Consultation',
+      description: 'Direct voice communication for better understanding.',
+      steps: [
+        'Fill consultation form with details',
+        'Attach medical reports if needed',
+        'Schedule your preferred time',
+        'Receive encrypted phone call from doctor'
+      ]
+    },
+    {
+      icon: video,
+      title: 'Video Consultation',
+      description: 'Face-to-face consultation for comprehensive assessment.',
+      steps: [
+        'Complete health assessment form',
+        'Upload relevant medical documents',
+        'Choose convenient date & time',
+        'Join secure video call with specialist'
+      ]
+    }
+  ];
+
   return (
-    <div className="w-full py-8 px-10 bg-gray-100">
-      <h2 className="text-center text-2xl font-bold mb-8">
-        Your Guide to <span className="text-blue-600">Virtual Consultation</span>
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-        <div className="bg-white p-6 rounded-lg shadow-lg">
-          <div className="flex items-center mb-4">
-            <img src={chat} alt="chat-icon" className="w-12 h-12 mr-2" />
-            <h5 className="text-l font-semibold text-left">Chat Section Guide</h5>
-          </div>
-          <ol className="list-decimal list-inside space-y-2 text-left text-sm">
-            <li>Fill the form, ensure your health queries are in detail.</li>
-            <li>Choose a plan that suits you better.</li>
-            <li>Pay consultation fee.</li>
-            <li>Book an Appointment.</li>
-          </ol>
-          <button className="bg-[#135480] px-3 py-1 rounded text-white mt-4">Get Started</button>
+    <div className="w-full py-16 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            How to Get <span className="text-blue-600">Consulted</span>
+          </h2>
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            Simple, secure, and straightforward. Choose how you want to consult and get expert medical advice.
+          </p>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow-lg">
-          <div className="flex items-center mb-4">
-            <img src={call} alt="call-icon" className="w-10 h-10 mr-2" />
-            <h5 className="text-l font-semibold text-left">Call Section Guide</h5>
-          </div>
-          <ol className="list-decimal  space-y-2 text-left text-sm">
-            <li>Fill the form, attach photos/report, if any.</li>
-            <li>Pick date and time for your consultation.</li>
-            <li>Pay your consultation fee.</li>
-            <li>Talk to a Doctor over an end-to-end encrypted phone call.</li>
-          </ol>
-          <button className="bg-[#135480] px-3 py-1 rounded text-white mt-4">Get Started</button>
-        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {consultationMethods.map((method, index) => (
+            <div
+              key={index}
+              className="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition duration-300 border border-gray-200"
+            >
+              <div className="mb-6">
+                <img src={method.icon} alt={method.title} className="w-16 h-16 object-contain" />
+              </div>
 
-        <div className="bg-white p-6 rounded rounded-lg shadow-lg">
-          <div className="flex items-center mb-4">
-            <img src={video} alt="video-icon" className="w-12 h-12 mr-2" />
-            <h5 className="text-l font-semibold text-left">Video Section Guide</h5>
-          </div>
-          <ol className="list-decimal space-y-2 text-left text-sm">
-            <li>Fill the form, attach photos/report, if any.</li>
-            <li>Pick date and time for your consultation.</li>
-            <li>Pay your consultation fee.</li>
-            <li>Talk to a Doctor over an end-to-end encrypted Video call.</li>
-          </ol>
-          <button className="bg-[#135480] px-3 py-1 rounded text-white mt-4">Get Started</button>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">{method.title}</h3>
+              <p className="text-gray-600 text-sm mb-6">{method.description}</p>
+
+              <div className="space-y-3 mb-6">
+                {method.steps.map((step, stepIndex) => (
+                  <div key={stepIndex} className="flex gap-3">
+                    <div className="flex-shrink-0 w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
+                      <span className="text-blue-600 font-bold text-sm">{stepIndex + 1}</span>
+                    </div>
+                    <p className="text-gray-700 text-sm">{step}</p>
+                  </div>
+                ))}
+              </div>
+
+              <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-700 transition duration-300">
+                Get Started
+              </button>
+            </div>
+          ))}
         </div>
       </div>
     </div>

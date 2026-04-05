@@ -8,7 +8,7 @@ import Home from './pages/Home/Homepage'
 import Navbar from './components/Navbar'
 import Dashboard from './pages/Dashboard/Dashboard'
 import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
-import ConsultationRequest from './pages/AI_integration/ConsultationRequest'
+// import ConsultationRequest from './pages/AI_integration/ConsultationRequest'
 import DoctorListing from './pages/SpecialistListingPage/DoctorListing'
 import TriageCheck from './pages/AI_integration/triageCheck'
 import DoctorRecommendation from './pages/AI_integration/recommendation/recommendDoctor'

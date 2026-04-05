@@ -10,7 +10,7 @@ import Dashboard from './pages/Dashboard/Dashboard'
 import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
 // import ConsultationRequest from './pages/AI_integration/ConsultationRequest'
 import DoctorListing from './pages/SpecialistListingPage/DoctorListing'
-import TriageCheck from './pages/AI_integration/triageCheck'
+import TriageCheck from './pages/AI_integration/TriageCheck'
 import DoctorRecommendation from './pages/AI_integration/recommendation/recommendDoctor'
 import NoteTaker from './pages/Dashboard/Doctor_Dashboard/Notetaker'
 import VideoCallWrapper from "./pages/Video_conferencing/VideoCallWrapper";
